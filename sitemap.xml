@@ -1,18 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml-stylesheet type="text/xsl" href="https://victormanueltn.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://victormanueltn.github.io/codingletters.github.io/</loc>
     <lastmod>2022-08-29T18:45:01+02:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</loc>
     <lastmod>2022-08-29T18:45:01+02:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://victormanueltn.github.io/codingletters.github.io/posts/</loc>
     <lastmod>2022-08-29T18:45:01+02:00</lastmod>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://victormanueltn.github.io/codingletters.github.io/categories/</loc>
-  </url><url>
+  </url>
+  
+  <url>
     <loc>https://victormanueltn.github.io/codingletters.github.io/tags/</loc>
   </url>
+  
 </urlset>

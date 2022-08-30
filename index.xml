@@ -6,14 +6,20 @@
     <description>Recent content on Coding Letters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 29 Aug 2022 18:45:01 +0200</lastBuildDate><atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Aug 2022 18:45:01 +0200</lastBuildDate>
+    
+        <atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>First test post</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</link>
       <pubDate>Mon, 29 Aug 2022 18:45:01 +0200</pubDate>
       
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</guid>
-      <description>Some text to test.</description>
+      
+        <description>Some text to test.</description>
+      
     </item>
     
   </channel>
