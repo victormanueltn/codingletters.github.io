@@ -8,12 +8,16 @@
     <language>en-us</language>
     <lastBuildDate>Mon, 29 Aug 2022 18:45:01 +0200</lastBuildDate><atom:link href="https://victormanueltn.github.io/codingletters.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>First test post</title>
+      <title>Welcome!</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</link>
       <pubDate>Mon, 29 Aug 2022 18:45:01 +0200</pubDate>
       
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</guid>
-      <description>Some text to test.</description>
+      <description>Dear reader,
+Welcome to Coding Letters!
+My name is Victor Trejo and I am passionate about programming. In this blog, I will write about things I learn in the vast world of software development.
+I have two main motivations for starting this blog:
+I want to give back to the community. We often talk about how the internet can be a hostile place, but we easily forget how often we receive quality help for free from people demanding nothing in return.</description>
     </item>
     
   </channel>
