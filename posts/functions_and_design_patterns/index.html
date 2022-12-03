@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<title>Of functions and design patterns | Coding Letters</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.102.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://victormanueltn.github.io/codingletters.github.io/css/index.css">
+<link rel="canonical" href="https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/">
+<link rel="alternate" type="application/rss+xml" href="" title="Coding Letters">
+
+<header>
+  
+    <a href="https://victormanueltn.github.io/codingletters.github.io/" class="title">Coding Letters</a>
+  
+  
+</header>
+
+<article>
+  <header>
+    <h1>Of functions and design patterns</h1>
+    <time datetime="2022-09-20T18:45:01&#43;02:00">September 20, 2022</time>
+  </header>
+  <p>Dear reader,</p>
+<p>I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?</p>
+<h2 id="stumbling-upon-a-function">Stumbling upon a function</h2>
+<p>Let&rsquo;s start by examining a simple code. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#75715e">// January
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">62</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> nuts_found <span style="color:#f92672">&gt;</span> nuts_needed_this_month {
+</span></span><span style="display:flex;"><span>        nuts_found <span style="color:#f92672">-</span> nuts_needed_this_month
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// February
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">72</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">56</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> nuts_found <span style="color:#f92672">&gt;</span> nuts_needed_this_month {
+</span></span><span style="display:flex;"><span>        nuts_found <span style="color:#f92672">-</span> nuts_needed_this_month
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span></code></pre></div><p>We see some repetition; a pattern stands out. The same logic is used for each month. The lines that are harder to read are the nuts surplus computation. Let&rsquo;s help the chipmunk out and make its code a bit clearer. Let&rsquo;s extract the nuts surplus computation into a <em>function</em>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#75715e">// January
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">62</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> compute_nuts_surplus(nuts_found, nuts_needed_this_month);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// February
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">72</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">56</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> compute_nuts_surplus(nuts_found, nuts_needed_this_month);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">compute_nuts_surplus</span>(nuts_found: <span style="color:#66d9ef">i32</span>, nuts_needed_this_month: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> nuts_found <span style="color:#f92672">&gt;</span> nuts_needed_this_month {
+</span></span><span style="display:flex;"><span>        nuts_found <span style="color:#f92672">-</span> nuts_needed_this_month
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>A useful definition of a function might be: a function is a code section contained in a reusable unit. We could write a function from scratch with a bit of foresight, but in our case, we discovered a pattern and extracted it into a function.</p>
+<p>Sure, it could still use some improvement, but the code is now a lot easier to inspect. Let&rsquo;s focus on the nuts surplus computation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">compute_nuts_surplus</span>(nuts_found: <span style="color:#66d9ef">i32</span>, nuts_needed_this_month: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> nuts_found <span style="color:#f92672">&gt;</span> nuts_needed_this_month {
+</span></span><span style="display:flex;"><span>        nuts_found <span style="color:#f92672">-</span> nuts_needed_this_month
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>What is this function doing? From the point of view of the caller, it is computing the nuts surplus. The ingredients for the computation are the number of nuts that have been found and the number of nuts needed in the current month.</p>
+<p>How is this function implemented? If the number of nuts found is greater than the number of nuts needed, their difference is returned. Otherwise, zero is returned. This sort of rings a bell&hellip; This is equivalent to taking the maximum between zero and the difference between nuts found and nuts needed!</p>
+<p>We recognized this because it is part of our vocabulary. There is probably a <code>max</code> function in every programming language or standard library and after coding for a while, we are almost guaranteed to run into it. Let&rsquo;s exploit the popularity of the <code>max</code> function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">compute_nuts_surplus_max</span>(nuts_found: <span style="color:#66d9ef">i32</span>, nuts_needed_this_month: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
+</span></span><span style="display:flex;"><span>    std::cmp::max(<span style="color:#ae81ff">0</span>, nuts_found <span style="color:#f92672">-</span> nuts_needed_this_month)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>By using the <code>max</code> function of Rust&rsquo;s standard library, our implementation became more concise and easier to understand! It is easier to understand <em>because</em> <code>max</code> is so well-known and widespread.</p>
+<h2 id="stumbling-upon-a-design-pattern">Stumbling upon a design pattern</h2>
+<p>The chipmunk comes back to us with a new version of its code. The chipmunk realized that the variables <code>nuts_found</code>, <code>nuts_needed_this_month</code>, and <code>nuts_surplus</code> are related. The new structure <code>MonthlyNutsInventory</code> expresses this relationship naturally, the chipmunk argues. It goes on to elaborate on how this better communicates the intention of the code to the reader. Well, all that sounds very convincing to me, let&rsquo;s take a look at the code!</p>
+<p>The new code is presented in two sections. First, a structure definition:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MonthlyNutsInventory</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> found: <span style="color:#66d9ef">i32</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> needed: <span style="color:#66d9ef">i32</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> MonthlyNutsInventory {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">surplus</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#66d9ef">i32</span> {
+</span></span><span style="display:flex;"><span>        std::cmp::max(<span style="color:#ae81ff">0</span>, self.found <span style="color:#f92672">-</span> self.needed)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add_nuts</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, new_nuts: <span style="color:#66d9ef">i32</span>) {
+</span></span><span style="display:flex;"><span>        self.found <span style="color:#f92672">+=</span> new_nuts;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We see the structure <code>MonthlyNutsInventory</code> with two associated functions, <code>surplus</code> and <code>add_nuts</code>. The <code>surplus</code> function calculates the current nuts surplus. The <code>add_nuts</code> function helps the chipmunk log newly found nuts into the monthly inventory.
+Let&rsquo;s see how the chipmunk used this structure in the second section of the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> january <span style="color:#f92672">=</span> MonthlyNutsInventory {
+</span></span><span style="display:flex;"><span>    found: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    needed: <span style="color:#ae81ff">62</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>println!(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    january.surplus()
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> february <span style="color:#f92672">=</span> MonthlyNutsInventory {
+</span></span><span style="display:flex;"><span>    found: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>    needed: <span style="color:#ae81ff">56</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">20</span>);
+</span></span><span style="display:flex;"><span>println!(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    february.surplus()
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>For a given month, an inventory is initialized, nuts are logged when they are found and the <code>surplus</code> function is used to compute the nuts surplus at the end of the month.</p>
+<p>We can happily report to the chipmunk that its code does communicate its intention more easily. However, two things could see some improvement.</p>
+<ul>
+<li>There is no reason for the <code>found</code> field to be public.</li>
+<li>It should not be the responsibility of the user of the <code>MonthlyNutsInventory</code> structure to initialize the <code>found</code> field when initializing the structure. The user is forced to provide zero as the initial value for the field <code>found</code> for each month. This is error-prone.</li>
+</ul>
+<p>To solve these two issues, let&rsquo;s make the <code>found</code> field private and create a function that will only take the value of the <code>needed</code> field as input. Since this function will need to initialize the value of the private <code>found</code> field, it cannot be a free function, it needs to be associated with the <code>MonthlyNutsInventory</code> structure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">MonthlyNutsInventory</span> {
+</span></span><span style="display:flex;"><span>    found: <span style="color:#66d9ef">i32</span>,
+</span></span><span style="display:flex;"><span>    needed: <span style="color:#66d9ef">i32</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">impl</span> MonthlyNutsInventory {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">surplus</span>(<span style="color:#f92672">&amp;</span>self) -&gt; <span style="color:#66d9ef">i32</span> {
+</span></span><span style="display:flex;"><span>        std::cmp::max(<span style="color:#ae81ff">0</span>, self.found <span style="color:#f92672">-</span> self.needed)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">add_nuts</span>(<span style="color:#f92672">&amp;</span><span style="color:#66d9ef">mut</span> self, new_nuts: <span style="color:#66d9ef">i32</span>) {
+</span></span><span style="display:flex;"><span>        self.found <span style="color:#f92672">+=</span> new_nuts;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pub</span> <span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">create</span>(needed: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#a6e22e">Self</span> {
+</span></span><span style="display:flex;"><span>        Self { found: <span style="color:#ae81ff">0</span>, needed }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The only modification required in the second section of the code is the initialization of the MonthlyNutsInventory instances with our new <code>create</code> function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> january <span style="color:#f92672">=</span> MonthlyNutsInventory::create(<span style="color:#ae81ff">62</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>println!(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    january.surplus()
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#66d9ef">mut</span> february <span style="color:#f92672">=</span> MonthlyNutsInventory::create(<span style="color:#ae81ff">56</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">17</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">8</span>);
+</span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">20</span>);
+</span></span><span style="display:flex;"><span>println!(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    february.surplus()
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>The initialization looks cleaner now since we don&rsquo;t need to worry about the <code>found</code> field of the <code>MonthlyNutsInventory</code> structure. This avoids dangerous miscalculations of nuts surplus during winter.</p>
+<p>Let&rsquo;s take a step back and see what happened. Adding the <code>create</code> associated function allowed us to protect the member variables of the <code>MonthlyNutsInventory</code> structure; The structure <code>MonthlyNutsInventory</code> no longer exposes its internal representation. This corresponds to a design pattern called the <strong>Static Creation Method</strong>. It is <strong>static</strong> because it is invoked by the structure, no initialized instance of the structure is required. It <strong>creates</strong> a new instance of the structure and returns it. A <strong>method</strong> or associated function is used so that the private internal representation of the structure can be initialized.</p>
+<p>Now that we are familiar with the <strong>Static Creation Method</strong>, we may use it if we encounter the same situation again. A useful definition of a design pattern might be: a design pattern is a solution to a software design problem. In this case, the problem was a needlessly public attribute and the need to initialize it. The solution was using a static creation method.</p>
+<p>The name <code>create</code> is perfectly fine. It describes clearly and concisely what the function is doing. However, Rust programmers might be scratching their heads over this choice. There is a very well-known alternative: <code>new</code>. It is a simple change of name, but it will help Rust developers understand the intention more quickly because we are now adopting standard vocabulary.</p>
+<h2 id="functions-and-design-patterns">Functions and design patterns</h2>
+<p>We proposed two main modifications to the chipmunk&rsquo;s code. In the first modification, we proposed to use a function, and in the second one, a design pattern. Part of the implementation of the design pattern used a function. So, are design patterns equivalent to functions?</p>
+<p>Design patterns are implemented with functions or other mechanisms. A few of the simpler design patterns might be implemented with a single function, but they are often more complex.</p>
+<p>Functions serve a very general purpose: code reuse. They have important positive consequences. They improve readability and maintainability. They also make code easier to test.</p>
+<p>Design patterns are more specific. Each design pattern offers a solution to a <strong>particular problem</strong> in a given <strong>context</strong>. In our example, the context is set by a characteristic of the programming language: the existence of public and private data. The problem was the exposure of the internal representation of a structure.</p>
+<p>Functions and design patterns are useful abstractions. Adopting the associated vocabulary improves communication between developers. It helps us share and reuse knowledge. Functions and design patterns allow us to be more efficient and build better software more quickly when used adequately.</p>
+
+</article>
+
+
+
+</html>
