@@ -15,7 +15,7 @@
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</guid>
       <description>Dear reader,
 I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?
-Stumbling upon a function Let&amp;rsquo;s start by examining a simple code. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.
+Stumbling upon a function Let&amp;rsquo;s start by examining some code written in Rust. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.
 // January let nuts_found = 17; let nuts_needed_this_month = 62; let nuts_surplus = { if nuts_found &amp;gt; nuts_needed_this_month { nuts_found - nuts_needed_this_month } else { 0 } }; println!</description>
     </item>
     
