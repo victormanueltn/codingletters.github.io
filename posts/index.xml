@@ -6,7 +6,18 @@
     <description>Recent content in Posts on Coding Letters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Sep 2022 18:45:01 +0200</lastBuildDate><atom:link href="https://victormanueltn.github.io/codingletters.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 05 Jan 2023 18:45:01 +0200</lastBuildDate><atom:link href="https://victormanueltn.github.io/codingletters.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Design patterns you know (but might not be aware of)</title>
+      <link>https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/</link>
+      <pubDate>Thu, 05 Jan 2023 18:45:01 +0200</pubDate>
+      
+      <guid>https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/</guid>
+      <description>Dear reader,
+As software grows complex and care is given to its structure, design patterns will appear. Sometimes they will be used intentionally and sometimes inadvertently. We might intuitively reach for patterns in our mental repertoire, or we might reinvent a long-known solution for a seemingly new problem. Regardless of our awareness of them, design patterns will show up.
+If we strive to be intentional about the structure of our software, we will be better equipped by being able to recognize design patterns.</description>
+    </item>
+    
     <item>
       <title>Of functions and design patterns</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</link>

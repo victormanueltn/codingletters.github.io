@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<title>Design patterns you know (but might not be aware of) | Coding Letters</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.102.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://victormanueltn.github.io/codingletters.github.io/css/index.css">
+<link rel="canonical" href="https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/">
+<link rel="alternate" type="application/rss+xml" href="" title="Coding Letters">
+
+<header>
+  
+    <a href="https://victormanueltn.github.io/codingletters.github.io/" class="title">Coding Letters</a>
+  
+  
+</header>
+
+<article>
+  <header>
+    <h1>Design patterns you know (but might not be aware of)</h1>
+    <time datetime="2023-01-05T18:45:01&#43;02:00">January 05, 2023</time>
+  </header>
+  <p>Dear reader,</p>
+<p>As software grows complex and care is given to its structure, <a href="https://victormanueltn.github.io/codingletters.github.io/">design patterns</a> will appear. Sometimes they will be used intentionally and sometimes inadvertently. We might intuitively reach for patterns in our mental repertoire, or we might reinvent a long-known solution for a seemingly new problem. Regardless of our awareness of them, design patterns will show up.</p>
+<p>If we strive to be intentional about the structure of our software, we will be better equipped by being able to recognize design patterns. A good familiarity with design patterns will allow us to willingly invoke them when required. When designing software, we will have a richer vocabulary, more colors in our palette.</p>
+<p>To train ourselves in this direction, I would like to mention three design patterns you have probably seen but might have not noticed. They are hiding in plain sight in the C++ standard library.</p>
+<h2 id="the-iterator-pattern">The iterator pattern</h2>
+<p>I had known the iterators in the C++ standard library long before I started learning about design patterns. I was so used to iterators, that I experienced disbelief when I first heard that they were a design pattern. They are.</p>
+<p>Thanks to the iterator pattern, different collections can be traversed with the same syntax. It doesn&rsquo;t matter if the collection is a hash map or a dynamic array, if there is an iterator available, the iterator will be used in the same way.</p>
+<p>There are many ways to iterate over a collection in C++. One of these makes the use of iterators most explicit:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> items{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> iterator <span style="color:#f92672">=</span> items.begin(); iterator <span style="color:#f92672">!=</span> items.end(); iterator<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>iterator <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="the-adapter-pattern">The adapter pattern</h2>
+<p>Did you know that the stack and the queue data structures in the C++ standard library are implemented with the same underlying data structure? If you did, you already knew two examples of the adapter pattern.</p>
+<p>The stack and the queue are implemented with a double-ended queue (or deque). This becomes evident in their second template argument when comparing their declaration side by side:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>deque<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">stack</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>deque<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">queue</span>;
+</span></span></code></pre></div><p>The adapter pattern is used to expose the simpler and well-known interfaces of the stack and the queue data structures. This makes them easier to reason with when solving problems that are elegantly expressed with stacks or queues.</p>
+<h2 id="the-strategy-pattern">The strategy pattern</h2>
+<p>The <code>std::accumulate</code> function from the <code>numeric</code> header iterates over a range applying a binary operation to subsequent elements to ultimately return a single value. Which binary operation, you ask? Thanks to the strategy pattern, you decide:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">InputIterator</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BinaryOperation</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>T accumulate(
+</span></span><span style="display:flex;"><span>    InputIterator first,
+</span></span><span style="display:flex;"><span>    InputIterator last,
+</span></span><span style="display:flex;"><span>    T init,
+</span></span><span style="display:flex;"><span>    BinaryOperation operation
+</span></span><span style="display:flex;"><span>);
+</span></span></code></pre></div><p>The use of the strategy pattern makes <code>std::accumulate</code> versatile. It allows reusing the iteration logic for any binary operation.</p>
+<h2 id="are-there-more">Are there more?</h2>
+<p>There are many more in the standard C++ library. Can you spot some of them? Klaus Iglberger went through some of them in his talk <a href="https://www.youtube.com/watch?v=OvO2NR7pXjg">Design Patterns: Facts and Misconceptions</a>. Be sure to check it out!</p>
+
+</article>
+
+
+
+</html>
