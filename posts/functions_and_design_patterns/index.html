@@ -2,7 +2,7 @@
 <html lang="en-us">
 <title>Of functions and design patterns | Coding Letters</title>
 <meta charset="utf-8">
-<meta name="generator" content="Hugo 0.102.0" />
+<meta name="generator" content="Hugo 0.122.0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://victormanueltn.github.io/codingletters.github.io/css/index.css">
 <link rel="canonical" href="https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/">
@@ -34,7 +34,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of </span><span style="color:#e6db74">{nuts_surplus}</span><span style="color:#e6db74"> nuts.&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// February
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">72</span>;
@@ -46,19 +46,19 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of </span><span style="color:#e6db74">{nuts_surplus}</span><span style="color:#e6db74"> nuts.&#34;</span>);
 </span></span></code></pre></div><p>We see some repetition; a pattern stands out. The same logic is used for each month. The lines that are harder to read are the nuts surplus computation. Let&rsquo;s help the chipmunk out and make its code a bit clearer. Let&rsquo;s extract the nuts surplus computation into a <em>function</em>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-rs" data-lang="rs"><span style="display:flex;"><span><span style="color:#75715e">// January
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">62</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> compute_nuts_surplus(nuts_found, nuts_needed_this_month);
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On January, we have a surplus of </span><span style="color:#e6db74">{nuts_surplus}</span><span style="color:#e6db74"> nuts.&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// February
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> nuts_found <span style="color:#f92672">=</span> <span style="color:#ae81ff">72</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_needed_this_month <span style="color:#f92672">=</span> <span style="color:#ae81ff">56</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> nuts_surplus <span style="color:#f92672">=</span> compute_nuts_surplus(nuts_found, nuts_needed_this_month);
-</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of {nuts_surplus} nuts.&#34;</span>);
+</span></span><span style="display:flex;"><span>println!(<span style="color:#e6db74">&#34;On February, we have a surplus of </span><span style="color:#e6db74">{nuts_surplus}</span><span style="color:#e6db74"> nuts.&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">fn</span> <span style="color:#a6e22e">compute_nuts_surplus</span>(nuts_found: <span style="color:#66d9ef">i32</span>, nuts_needed_this_month: <span style="color:#66d9ef">i32</span>) -&gt; <span style="color:#66d9ef">i32</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> nuts_found <span style="color:#f92672">&gt;</span> nuts_needed_this_month {
@@ -111,7 +111,7 @@ Let&rsquo;s see how the chipmunk used this structure in the second section of th
 </span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">17</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>println!(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> nuts.&#34;</span>,
 </span></span><span style="display:flex;"><span>    january.surplus()
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
@@ -126,7 +126,7 @@ Let&rsquo;s see how the chipmunk used this structure in the second section of th
 </span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">8</span>);
 </span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">20</span>);
 </span></span><span style="display:flex;"><span>println!(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> nuts.&#34;</span>,
 </span></span><span style="display:flex;"><span>    february.surplus()
 </span></span><span style="display:flex;"><span>);
 </span></span></code></pre></div><p>For a given month, an inventory is initialized, nuts are logged when they are found and the <code>surplus</code> function is used to compute the nuts surplus at the end of the month.</p>
@@ -161,7 +161,7 @@ Let&rsquo;s see how the chipmunk used this structure in the second section of th
 </span></span><span style="display:flex;"><span>january.add_nuts(<span style="color:#ae81ff">17</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>println!(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On January, we have a surplus of </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> nuts.&#34;</span>,
 </span></span><span style="display:flex;"><span>    january.surplus()
 </span></span><span style="display:flex;"><span>);
 </span></span><span style="display:flex;"><span>
@@ -173,7 +173,7 @@ Let&rsquo;s see how the chipmunk used this structure in the second section of th
 </span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">8</span>);
 </span></span><span style="display:flex;"><span>february.add_nuts(<span style="color:#ae81ff">20</span>);
 </span></span><span style="display:flex;"><span>println!(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of {0} nuts.&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;On February, we have a surplus of </span><span style="color:#e6db74">{0}</span><span style="color:#e6db74"> nuts.&#34;</span>,
 </span></span><span style="display:flex;"><span>    february.surplus()
 </span></span><span style="display:flex;"><span>);
 </span></span></code></pre></div><p>The initialization looks cleaner now since we don&rsquo;t need to worry about the <code>found</code> field of the <code>MonthlyNutsInventory</code> structure. This avoids dangerous miscalculations of nuts surplus during winter.</p>

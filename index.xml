@@ -6,41 +6,35 @@
     <description>Recent content on Coding Letters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 Jan 2023 18:45:01 +0200</lastBuildDate><atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Feb 2024 11:32:25 +0100</lastBuildDate>
+    <atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick_feedback</title>
+      <link>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</link>
+      <pubDate>Sun, 11 Feb 2024 11:32:25 +0100</pubDate>
+      <guid>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</guid>
+      <description>Dear reader,&#xA;It is 1989. You finally reached the last level of Super Mario Bros and your heart is pounding. You have a single life left. You have never faced these obstacles, these pits, yet the adrenaline kicks in and you somehow reach Bowser. You pause. You take a breath. You go for it&amp;hellip; but you miscalculated, a fireball got you. Game over. You have to restart. All over again. From the very beginning&amp;hellip;</description>
+    </item>
     <item>
       <title>Design patterns you know (but might not be aware of)</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/</link>
       <pubDate>Thu, 05 Jan 2023 18:45:01 +0200</pubDate>
-      
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/</guid>
-      <description>Dear reader,
-As software grows complex and care is given to its structure, design patterns will appear. Sometimes they will be used intentionally and sometimes inadvertently. We might intuitively reach for patterns in our mental repertoire, or we might reinvent a long-known solution for a seemingly new problem. Regardless of our awareness of them, design patterns will show up.
-If we strive to be intentional about the structure of our software, we will be better equipped by being able to recognize design patterns.</description>
+      <description>Dear reader,&#xA;As software grows complex and care is given to its structure, design patterns will appear. Sometimes they will be used intentionally and sometimes inadvertently. We might intuitively reach for patterns in our mental repertoire, or we might reinvent a long-known solution for a seemingly new problem. Regardless of our awareness of them, design patterns will show up.&#xA;If we strive to be intentional about the structure of our software, we will be better equipped by being able to recognize design patterns.</description>
     </item>
-    
     <item>
       <title>Of functions and design patterns</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</link>
       <pubDate>Tue, 20 Sep 2022 18:45:01 +0200</pubDate>
-      
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</guid>
-      <description>Dear reader,
-I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?
-Stumbling upon a function Let&amp;rsquo;s start by examining some code written in Rust. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.
-// January let nuts_found = 17; let nuts_needed_this_month = 62; let nuts_surplus = { if nuts_found &amp;gt; nuts_needed_this_month { nuts_found - nuts_needed_this_month } else { 0 } }; println!</description>
+      <description>Dear reader,&#xA;I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?&#xA;Stumbling upon a function Let&amp;rsquo;s start by examining some code written in Rust. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.&#xA;// January let nuts_found = 17; let nuts_needed_this_month = 62; let nuts_surplus = { if nuts_found &amp;gt; nuts_needed_this_month { nuts_found - nuts_needed_this_month } else { 0 } }; println!</description>
     </item>
-    
     <item>
       <title>Welcome!</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</link>
       <pubDate>Mon, 29 Aug 2022 18:45:01 +0200</pubDate>
-      
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/firstpost/</guid>
-      <description>Dear reader,
-Welcome to Coding Letters!
-I will briefly tell you who I am, why I want to write, and what I will write about.
-My name is Victor Trejo and I am passionate about programming. I was first exposed to programming during my Mechanical Engineering studies. During my eleven years in academia, I grew more and more interested in software development. This led me to work as a developer and after more than five years of experience, I do my best to continue learning every day.</description>
+      <description>Dear reader,&#xA;Welcome to Coding Letters!&#xA;I will briefly tell you who I am, why I want to write, and what I will write about.&#xA;My name is Victor Trejo and I am passionate about programming. I was first exposed to programming during my Mechanical Engineering studies. During my eleven years in academia, I grew more and more interested in software development. This led me to work as a developer and after more than five years of experience, I do my best to continue learning every day.</description>
     </item>
-    
   </channel>
 </rss>
