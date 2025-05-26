@@ -6,12 +6,12 @@
     <description>Recent content on Coding Letters</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 May 2024 18:45:01 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 24 May 2025 18:45:01 +0200</lastBuildDate>
     <atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Of functions and design patterns</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</link>
-      <pubDate>Fri, 24 May 2024 18:45:01 +0200</pubDate>
+      <pubDate>Sat, 24 May 2025 18:45:01 +0200</pubDate>
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</guid>
       <description>Dear reader,&#xA;I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?&#xA;Stumbling upon a function Let&amp;rsquo;s start by examining some code written in Rust. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.&#xA;// January let nuts_found = 17; let nuts_needed_this_month = 62; let nuts_surplus = { if nuts_found &amp;gt; nuts_needed_this_month { nuts_found - nuts_needed_this_month } else { 0 } }; println!</description>
     </item>
