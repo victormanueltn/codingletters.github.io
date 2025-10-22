@@ -6,8 +6,15 @@
     <description>Recent content on Coding Letters by Victor Trejo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 16 Jul 2025 18:45:01 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 22 Oct 2025 11:32:25 +0100</lastBuildDate>
     <atom:link href="https://victormanueltn.github.io/codingletters.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Quick feedback</title>
+      <link>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</link>
+      <pubDate>Wed, 22 Oct 2025 11:32:25 +0100</pubDate>
+      <guid>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</guid>
+      <description>Dear reader,&#xA;It is 1989. You finally reached the last level of Super Mario Bros and your heart is pounding. You have a single life left. You have never faced these obstacles, these pits, yet the adrenaline kicks in and you somehow reach Bowser. You pause. You take a breath. You go for it&amp;hellip; but you miscalculated, a fireball got you. Game over. You have to restart. All over again. From the very beginning&amp;hellip;</description>
+    </item>
     <item>
       <title>Design patterns you know (but might not be aware of)</title>
       <link>https://victormanueltn.github.io/codingletters.github.io/posts/design_patterns_you_know/</link>
@@ -21,13 +28,6 @@
       <pubDate>Sat, 24 May 2025 18:45:01 +0200</pubDate>
       <guid>https://victormanueltn.github.io/codingletters.github.io/posts/functions_and_design_patterns/</guid>
       <description>Dear reader,&#xA;I have been thinking about functions and design patterns and how they resemble one another. They emerge similarly and they can be powerful communication tools. What differentiates them and why should we care?&#xA;Stumbling upon a function Let&amp;rsquo;s start by examining some code written in Rust. With it, a chipmunk is keeping track of the nuts surplus it gathers every month.&#xA;// January let nuts_found = 17; let nuts_needed_this_month = 62; let nuts_surplus = { if nuts_found &amp;gt; nuts_needed_this_month { nuts_found - nuts_needed_this_month } else { 0 } }; println!</description>
-    </item>
-    <item>
-      <title>Quick feedback</title>
-      <link>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://victormanueltn.github.io/codingletters.github.io/posts/quick_feedback/</guid>
-      <description>Dear reader,&#xA;It is 1989. You finally reached the last level of Super Mario Bros and your heart is pounding. You have a single life left. You have never faced these obstacles, these pits, yet the adrenaline kicks in and you somehow reach Bowser. You pause. You take a breath. You go for it&amp;hellip; but you miscalculated, a fireball got you. Game over. You have to restart. All over again. From the very beginning&amp;hellip;</description>
     </item>
   </channel>
 </rss>
